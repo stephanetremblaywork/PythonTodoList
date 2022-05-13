@@ -2,28 +2,25 @@ class ToDoItem():
 
     def __init__(self, isDone = False, description = "") -> None:
         if (isDone is bool and description is str):
-            self.isDone = isDone
-            self.description = description
+            self._isDone = isDone
+            self._description = description
         else:
             raise TypeError("Invalid types.")
 
-    def __init__(self) -> None:
-        pass
-
     def setDone(self) -> None:
-        self.isDone = True
+        self._isDone = True
     
     def setNotDone(self) -> None:
-        self.isDone = False
+        self._isDone = False
 
     def setDescription(self, description = "") -> None:
         if (description is str):
-            self.description = description
+            self._description = description
         else:
             raise TypeError("Invalid type.")
     
     def getDone(self) -> bool:
-        return self.isDone
+        return self._isDone
 
     def getDescription(self) -> str:
-        return self.description
+        return self._description
