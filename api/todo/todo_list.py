@@ -1,26 +1,23 @@
-from typing import List
-
-from API.ToDoListAPI.to_do_item import ToDoItem
-
+from api.todo.todo_item import ToDoItem
 
 class ToDoList():
 
     def __init__(self) -> None:
-        self._toDoList = List()
+        self._toDoList = []
 
     def __init__(self, toDoList) -> None:
-        if (toDoList is List):
+        if (toDoList is list):
             self._toDoList = toDoList
         else:
             raise TypeError("Invalid type.")
 
-    def getAllItems(self) -> List:
+    def getAllItems(self) -> list:
         return self._toDoList
 
-    def getNotDoneItems(self) -> List:
+    def getNotDoneItems(self) -> list:
         return list(filter(lambda x: (x.isDone == False), self._toDoList))
 
-    def getDoneItems(self) -> List:
+    def getDoneItems(self) -> list:
         return list(filter(lambda x: (x.isDone == True), self._toDoList))
 
     def getItemAtPosition(self, position) -> ToDoItem:
