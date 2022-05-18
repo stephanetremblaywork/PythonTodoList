@@ -1,5 +1,4 @@
-from unittest import *
-from to_do_item import ToDoItem
+from unittest import TestCase
 
 class ToDoItemTestCase(TestCase):
 
@@ -10,4 +9,4 @@ class ToDoItemTestCase(TestCase):
         pass
 
     def testA(self):
-        self.assertTrue(False, "Default fail test")
+        self.fail("Failing test by default.")
