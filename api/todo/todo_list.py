@@ -2,11 +2,21 @@ from api.todo.todo_item import TodoItem
 
 class TodoList():
 
-    def __init__(self, todoList = []) -> None:
-        if (isinstance(todoList, list)):
+    def __init__(self, name = "", todoList = []) -> None:
+        if (isinstance(name, str) and isinstance(todoList, list)):
+            self._name = name
             self._todoList = todoList
         else:
             raise TypeError("Invalid type.")
+
+    def setName(self, name) -> None:
+        if (isinstance(name, str)):
+            self._name = name
+        else:
+            raise TypeError("Invalid type.")
+
+    def getName(self) -> str:
+        return self._name
 
     def getAllItems(self) -> list:
         return self._todoList
@@ -43,4 +53,3 @@ class TodoList():
             self._todoList.insert(newPosition, self._todoList.pop(oldPosition))
         else:
             raise TypeError("Invalid types.")
-    

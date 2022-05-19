@@ -13,17 +13,38 @@ class TodoListTestCase(TestCase):
 
     def test_init(self) -> None:
         todoList = TodoList()
-        self.assertEqual(len(todoList._todoList), 0)
+        self.assertListEqual(todoList._todoList, [])
+        self.assertEqual(todoList._name, "")
 
         todoItem0 = TodoItem(True, "todoItem0")
         todoItem1 = TodoItem(False, "todoItem1")
         todoItem2 = TodoItem(True, "todoItem2")
         todoListItems = [todoItem0, todoItem1, todoItem2]
-        todoList = TodoList(todoListItems)
+        name = "My Todo List"
+
+        todoList = TodoList(name=name)
+        self.assertEqual(todoList._name, name)
+        self.assertListEqual(todoList._todoList, [])
+
+        todoList = TodoList(todoList=todoListItems)
+        self.assertEqual(todoList._name, "")
+        self.assertListEqual(todoList._todoList, todoListItems)
+
+        todoList = TodoList(name=name, todoList=todoListItems)
+        self.assertEqual(todoList._name, name)
         self.assertListEqual(todoList._todoList, todoListItems)
 
         with self.assertRaises(TypeError):
             todoList = TodoList(1024)
+        
+        with self.assertRaises(TypeError):
+            todoList = TodoList(todoListItems)
+
+        with self.assertRaises(TypeError):
+            todoList = TodoList(name=1024)
+
+        with self.assertRaises(TypeError):
+            todoList = TodoList(todoList="Hello World")
 
     def test_getAllItems(self) -> None:
         todoListItems = []
@@ -34,7 +55,7 @@ class TodoListTestCase(TestCase):
         todoItem1 = TodoItem(False, "todoItem1")
         todoItem2 = TodoItem(True, "todoItem2")
         todoListItems += [todoItem0, todoItem1, todoItem2]
-        todoList = TodoList(todoListItems)
+        todoList = TodoList(todoList=todoListItems)
         self.assertListEqual(todoList.getAllItems(), todoListItems)
 
     def test_getNotDoneItems(self) -> None:
@@ -49,7 +70,7 @@ class TodoListTestCase(TestCase):
         todoItem4 = TodoItem(False, "todoItem4")
         todoItemList += [todoItem0, todoItem1, todoItem2, todoItem3, todoItem4]
         todoItemsNotDoneList = [todoItem1, todoItem4]
-        todoList = TodoList(todoItemList)
+        todoList = TodoList(todoList=todoItemList)
         self.assertListEqual(todoList.getNotDoneItems(), todoItemsNotDoneList)
 
     def test_getDoneItems(self) -> None:
@@ -64,7 +85,7 @@ class TodoListTestCase(TestCase):
         todoItem4 = TodoItem(False, "todoItem4")
         todoItemList += [todoItem0, todoItem1, todoItem2, todoItem3, todoItem4]
         todoItemsDoneList = [todoItem0, todoItem2, todoItem3]
-        todoList = TodoList(todoItemList)
+        todoList = TodoList(todoList=todoItemList)
         self.assertListEqual(todoList.getDoneItems(), todoItemsDoneList)
 
     def test_getItemAtPosition(self) -> None:
@@ -82,7 +103,7 @@ class TodoListTestCase(TestCase):
         todoItem3 = TodoItem(True, "todoItem3")
         todoItem4 = TodoItem(False, "todoItem4")
         todoItemList += [todoItem0, todoItem1, todoItem2, todoItem3, todoItem4]
-        todoList = TodoList(todoItemList)
+        todoList = TodoList(todoList=todoItemList)
         self.assertEqual(todoList.getItemAtPosition(2), todoItem2)
 
     def test_addTodoItem(self) -> None:
@@ -93,7 +114,7 @@ class TodoListTestCase(TestCase):
         todoItem4 = TodoItem(False, "todoItem4")
         todoItemList = [todoItem0, todoItem1, todoItem2, todoItem3, todoItem4]
         newTodoItem = TodoItem(True, "newTodoItem")
-        todoList = TodoList(todoItemList)
+        todoList = TodoList(todoList=todoItemList)
         assert (len(todoList._todoList) == 5)
         todoList.addTodoItem(newTodoItem)
         self.assertEquals(todoList._todoList[5], newTodoItem)
@@ -106,7 +127,18 @@ class TodoListTestCase(TestCase):
         todoItem4 = TodoItem(False, "todoItem4")
         todoItemListBefore = [todoItem0, todoItem1, todoItem2, todoItem3, todoItem4]
         todoItemListAfter = [todoItem0, todoItem1, todoItem3, todoItem2, todoItem4]
-        todoList = TodoList(todoItemListBefore)
+        todoList = TodoList(todoList=todoItemListBefore)
         todoList.moveItem(3,2)
         self.assertListEqual(todoList._todoList, todoItemListAfter)
-        
+    
+    def test_setName(self) -> None:
+        name = "My Todo List"
+        todoList = TodoList()
+        todoList.setName(name)
+        self.assertEqual(todoList._name, name)
+
+    def test_getName(self) -> None:
+        name = "My Todo List"
+        todoList = TodoList()
+        todoList.setName(name)
+        self.assertEqual(todoList.getName(), name)
