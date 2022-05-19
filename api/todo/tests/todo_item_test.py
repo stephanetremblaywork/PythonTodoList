@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from api.todo.todo_item import ToDoItem
+from api.todo.todo_item import TodoItem
 
-class ToDoItemTestCase(TestCase):
+class TodoItemTestCase(TestCase):
 
     def setUp(self):
         pass
@@ -14,31 +14,31 @@ class ToDoItemTestCase(TestCase):
         itemDescription = "DESCRIPTION"
         itemIsDone = True
 
-        todoItem = ToDoItem()
+        todoItem = TodoItem()
         self.assertEqual(todoItem._description, "")
         self.assertEqual(todoItem._isDone, False)
 
-        todoItem = ToDoItem(isDone=True)
+        todoItem = TodoItem(isDone=True)
         self.assertEqual(todoItem._description, "")
         self.assertEqual(todoItem._isDone, True)
 
-        todoItem = ToDoItem(description=itemDescription)
+        todoItem = TodoItem(description=itemDescription)
         self.assertEqual(todoItem._description, itemDescription)
         self.assertEqual(todoItem._isDone, False)
 
-        todoItem = ToDoItem(isDone=itemIsDone, description=itemDescription)
+        todoItem = TodoItem(isDone=itemIsDone, description=itemDescription)
         self.assertEqual(todoItem._description, itemDescription)
         self.assertEqual(todoItem._isDone, itemIsDone)
 
         with self.assertRaises(TypeError):
-            ToDoItem(isDone="string argument")
+            TodoItem(isDone="string argument")
         
         with self.assertRaises(TypeError):
-            ToDoItem(description=1024)
+            TodoItem(description=1024)
     
     def test_setIsDone(self) -> None:
         isDone = True
-        todoItem = ToDoItem()
+        todoItem = TodoItem()
         todoItem.setIsDone(isDone)
         self.assertEqual(todoItem._isDone, isDone)
 
@@ -51,7 +51,7 @@ class ToDoItemTestCase(TestCase):
     
     def test_setDescription(self) -> None:
         description = "DESCRIPTION"
-        todoItem = ToDoItem()
+        todoItem = TodoItem()
         todoItem.setDescription(description)
         self.assertEqual(todoItem._description, description)
 
@@ -60,10 +60,10 @@ class ToDoItemTestCase(TestCase):
     
     def test_getIsDone(self) -> bool:
         isDone = True
-        todoItem = ToDoItem(isDone=isDone)
+        todoItem = TodoItem(isDone=isDone)
         self.assertEqual(todoItem.getIsDone(), isDone)
 
     def test_getDescription(self) -> str:
         description = "DESCRIPTION"
-        todoItem = ToDoItem(description=description)
+        todoItem = TodoItem(description=description)
         self.assertEqual(todoItem.getDescription(), description)

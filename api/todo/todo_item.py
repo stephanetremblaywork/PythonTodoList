@@ -1,4 +1,4 @@
-class ToDoItem():
+class TodoItem():
 
     def __init__(self, isDone = False, description = "") -> None:
         if (isinstance(isDone, bool) and isinstance(description, str)):

@@ -1,40 +1,46 @@
-from api.todo.todo_item import ToDoItem
+from api.todo.todo_item import TodoItem
 
-class ToDoList():
+class TodoList():
 
-    def __init__(self) -> None:
-        self._toDoList = []
-
-    def __init__(self, toDoList) -> None:
-        if (toDoList is list):
-            self._toDoList = toDoList
+    def __init__(self, todoList = []) -> None:
+        if (isinstance(todoList, list)):
+            self._todoList = todoList
         else:
             raise TypeError("Invalid type.")
 
     def getAllItems(self) -> list:
-        return self._toDoList
+        return self._todoList
 
     def getNotDoneItems(self) -> list:
-        return list(filter(lambda x: (x.isDone == False), self._toDoList))
+        if (len(self._todoList) == 0):
+            return []
+
+        return list(filter(lambda x: (x.getIsDone() == False), self._todoList))
 
     def getDoneItems(self) -> list:
-        return list(filter(lambda x: (x.isDone == True), self._toDoList))
+        if (len(self._todoList) == 0):
+            return []
 
-    def getItemAtPosition(self, position) -> ToDoItem:
-        if (position is int):
-            return self._toDoList[position]
+        return list(filter(lambda x: (x.getIsDone() == True), self._todoList))
+
+    def getItemAtPosition(self, position) -> TodoItem:
+        if (isinstance(position,int)):
+            if (len(self._todoList) == 0):
+                raise IndexError("Index out of range")
+
+            return self._todoList[position]
         else:
             raise TypeError("Invalid type.")
 
-    def addToDoItem(self, toDoItem) -> None:
-        if (toDoItem is ToDoItem):
-            self._toDoList.append(toDoItem)
+    def addTodoItem(self, toDoItem = TodoItem(False, "")) -> None:
+        if (isinstance(toDoItem, TodoItem)):
+            self._todoList.append(toDoItem)
         elif ():
             raise TypeError("Invalid type.")
 
-    def addToDoItem(self, isDone = False, description = "") -> None:
-        self._toDoList.append(ToDoItem(isDone, description))
-
     def moveItem(self, oldPosition, newPosition) -> None:
-        self._toDoList.insert(newPosition, self._toDoList.pop(oldPosition))
+        if (isinstance(oldPosition, int) and isinstance(newPosition, int)):
+            self._todoList.insert(newPosition, self._todoList.pop(oldPosition))
+        else:
+            raise TypeError("Invalid types.")
     
