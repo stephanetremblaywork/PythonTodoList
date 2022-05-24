@@ -5,8 +5,16 @@ from api.todo.tests.todo_list_test import TodoListTestCase
 
 def getTodoTestSuite():
     suite = TestSuite()
-    suite.addTest(TodoItemTestCase('Basic ToDoItem class unit tests.'))
-    suite.addTest(TodoListTestCase('Basic ToDoList class unit tests.'))
+
+    todoItemTests = [ m for m in dir(TodoItemTestCase) if m.startswith('test_')]
+    todoListTests = [ m for m in dir(TodoListTestCase) if m.startswith('test_')]
+
+    for test in todoItemTests:
+        suite.addTest(TodoItemTestCase(test))
+
+    for test in todoListTests:
+        suite.addTest(TodoListTestCase(test))
+
     return suite
 
 if __name__ == '__main__':
