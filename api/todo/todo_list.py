@@ -42,14 +42,23 @@ class TodoList():
         else:
             raise TypeError("Invalid type.")
 
-    def addTodoItem(self, toDoItem = TodoItem(False, "")) -> None:
-        if (isinstance(toDoItem, TodoItem)):
-            self._todoList.append(toDoItem)
-        elif ():
+    def addTodoItem(self, todoItem = TodoItem(isDone=False, description=""), position=None) -> None:
+        if (isinstance(todoItem, TodoItem) and (isinstance(position, int) or position is None)):
+            if (position is None):
+                self._todoList.append(todoItem)    
+            else:
+                self._todoList.insert(position, todoItem)
+
+        else:
             raise TypeError("Invalid type.")
+
+    def removeItemAtPosition(self, position) -> TodoItem:
+        item = self._todoList.pop(position)
+        return item
 
     def moveItem(self, oldPosition, newPosition) -> None:
         if (isinstance(oldPosition, int) and isinstance(newPosition, int)):
             self._todoList.insert(newPosition, self._todoList.pop(oldPosition))
+
         else:
             raise TypeError("Invalid types.")
