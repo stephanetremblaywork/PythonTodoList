@@ -15,22 +15,14 @@ class TodoItemTestCase(TestCase):
         itemIsDone = True
 
         todoItem = TodoItem()
-        self.assertEqual(todoItem._position, 0)
         self.assertEqual(todoItem._description, "")
         self.assertEqual(todoItem._isDone, False)
 
-        todoItem = TodoItem(position=2)
-        self.assertEqual(todoItem._position, 2)
-        self.assertEqual(todoItem._description, "")
-        self.assertEqual(todoItem._isDone, False)
-        
         todoItem = TodoItem(isDone=True)
-        self.assertEqual(todoItem._position, 0)
         self.assertEqual(todoItem._description, "")
         self.assertEqual(todoItem._isDone, True)
 
         todoItem = TodoItem(description=itemDescription)
-        self.assertEqual(todoItem._position, 0)
         self.assertEqual(todoItem._description, itemDescription)
         self.assertEqual(todoItem._isDone, False)
 
@@ -43,15 +35,6 @@ class TodoItemTestCase(TestCase):
         
         with self.assertRaises(TypeError):
             TodoItem(description=1024)
-
-    def test_setPosition(self) -> None:
-        position = 4
-        todoItem = TodoItem()
-        todoItem.setPosition(position)
-        self.assertEqual(todoItem._position, position)
-
-        with self.assertRaises(TypeError):
-            todoItem.setPosition("Not a position")
 
     def test_setIsDone(self) -> None:
         isDone = True
@@ -74,12 +57,6 @@ class TodoItemTestCase(TestCase):
 
         with self.assertRaises(TypeError):
             self.test_setDescription(1024)
-
-    def test_getPosition(self) -> None:
-        position = 4
-        todoItem = TodoItem()
-        todoItem.setPosition(position)
-        self.assertEqual(todoItem.getPosition(), position)
 
     def test_getIsDone(self) -> bool:
         isDone = True
