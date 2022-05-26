@@ -4,10 +4,10 @@ from api.todo.todo_item import TodoItem
 
 class TodoItemTestCase(TestCase):
 
-    def setUp(self):
+    def setUp(self) -> None:
         pass
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
     def test_init(self) -> None:
@@ -58,12 +58,12 @@ class TodoItemTestCase(TestCase):
         with self.assertRaises(TypeError):
             self.test_setDescription(1024)
 
-    def test_getIsDone(self) -> bool:
+    def test_getIsDone(self) -> None:
         isDone = True
         todoItem = TodoItem(isDone=isDone)
         self.assertEqual(todoItem.getIsDone(), isDone)
 
-    def test_getDescription(self) -> str:
+    def test_getDescription(self) -> None:
         description = "DESCRIPTION"
         todoItem = TodoItem(description=description)
         self.assertEqual(todoItem.getDescription(), description)

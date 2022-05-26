@@ -5,10 +5,10 @@ from api.todo.todo_list import TodoList
 
 class TodoListTestCase(TestCase):
 
-    def setUp(self):
+    def setUp(self) -> None:
         pass
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
     def test_init(self) -> None:
