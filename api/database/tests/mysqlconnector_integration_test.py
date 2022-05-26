@@ -1,6 +1,6 @@
 import unittest
 from unittest import TestCase
-from api.data.mysqlconnector import MySQLConnector
+from api.database.mysqlconnector import MySQLConnector
 
 class MySQLConnectorIntegrationTestCase(TestCase):
 

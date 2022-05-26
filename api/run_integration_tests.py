@@ -1,6 +1,6 @@
 from unittest import TestSuite
 from unittest import TextTestRunner
-from api.data.tests.mysqlconnector_test import MySQLConnectorIntegrationTestCase
+from api.database.tests.mysqlconnector_test import MySQLConnectorIntegrationTestCase
 
 def getMySQLConnectorIntegrationTestSuite():
     suite = TestSuite()

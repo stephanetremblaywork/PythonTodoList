@@ -2,7 +2,7 @@ from unittest import TestSuite
 from unittest import TextTestRunner
 from api.todo.tests.todo_item_test import TodoItemTestCase
 from api.todo.tests.todo_list_test import TodoListTestCase
-from api.data.tests.mysqlconnector_test import MySQLConnectorTestCase
+from api.database.tests.mysqlconnector_test import MySQLConnectorTestCase
 
 def getTestSuite():
     suite = TestSuite()
